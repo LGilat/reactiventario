@@ -100,4 +100,20 @@ table {
     background-color: #d32f2f;
 }
 
+.no-datos {
+    width: 50%;
+    font-style: italic;
+    color: #888;
+    margin: 0 auto;
+    margin-top: 80px;
+    text-align: center;
+    font-size: 3.2em;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    padding: 100px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #9b5b5b;
+}
+
 

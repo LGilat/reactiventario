@@ -4,7 +4,7 @@ import './DataDisplay.css'
 
 
 
-const DataDisplay = ({ endpoint, trigger }) => {
+const DataDisplay = ({ endpoint, trigger, columnas }) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -32,7 +32,7 @@ const DataDisplay = ({ endpoint, trigger }) => {
 
     const handleDelete = (id) => {
         console.log('Eliminando... ', id);
-        if ( !confirm('¿Está seguro de eliminar este registro?')) 
+        if (!confirm('¿Está seguro de eliminar este registro?'))
             return;
 
         fetch(`http://localhost:3000/api/${endpoint}/${id}`, {
@@ -71,7 +71,7 @@ const DataDisplay = ({ endpoint, trigger }) => {
     const handleSave = (id) => {
         console.log('Guardando... ', id);
         const updatedData = data.find(item => item.id === id);
-        if (updatedData){
+        if (updatedData) {
 
             console.log(updatedData);
             fetch(`http://localhost:3000/api/${endpoint}/${id}`, {
@@ -95,7 +95,7 @@ const DataDisplay = ({ endpoint, trigger }) => {
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                }); 
+                });
 
         }
         else {
@@ -112,34 +112,42 @@ const DataDisplay = ({ endpoint, trigger }) => {
         return <div>Error: {error.message}</div>;
     }
 
+    if (data === null || data.length === 0) {
+        return <div className='no-datos'>No hay datos disponibles.</div>;
+    }
+
     return (
         <div>
             <h1 className='titulo proveedor-title'> <FaTable />  {title}{(title === 'Proveedor') ? 'es' : 's'}</h1>
             <table title='Tabla de inventario'>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Contacto</th>
-                        <th>Dirección</th>
+
+                        {columnas.map((columna, index) => (
+                            <th key={8 + index}>{columna}</th>
+                        ))}
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map(item => (
                         <tr key={item.id}>
-                            <td>{item.id}</td>
 
                             {
                                 (isEditing && idToEdit === item.id) ?
                                     (
                                         <>
-                                            <td><input type="text" className='editable-input' defaultValue={item.nombre} onChange={(e) => { item.nombre = e.target.value }} /></td>
+                                            {columnas.map((columna, index) => (
+                                                <td key={item.id + index}>
+                                                    <input type="text" className='editable-input' defaultValue={item[columna]} onChange={(e) => { item[columna] = e.target.value }} />
+                                                </td>
+                                            ))}
+                                            {/* <td><input type="text" className='editable-input' defaultValue={item.nombre} onChange={(e) => { item.nombre = e.target.value }} /></td>
                                             <td><input type="text" className='editable-input' defaultValue={item.contacto} onChange={(e) => { item.contacto = e.target.value }} /></td>
-                                            <td><input type="text" className='editable-input' defaultValue={item.direccion} onChange={(e) => { item.direccion = e.target.value }} /></td>
+                                            <td><input type="text" className='editable-input' defaultValue={item.direccion} onChange={(e) => { item.direccion = e.target.value }} /></td> */}
                                             <td className='edit-buttons'>
                                                 <button className='save-button' onClick={() => handleSave(item.id)}>Guardar</button>
-                                                <button className='cancel-button'  onClick={() => handleCancel()}>Cancelar</button>
+                                                <button className='cancel-button' onClick={() => handleCancel()}>Cancelar</button>
                                             </td>
                                         </>
 
@@ -149,9 +157,14 @@ const DataDisplay = ({ endpoint, trigger }) => {
 
                                     (
                                         <>
-                                            <td>{item.nombre}</td>
+                                            {/*  <td>{item.nombre}</td>
                                             <td>{item.contacto}</td>
-                                            <td>{item.direccion}</td>
+                                            <td>{item.direccion}</td> */}
+                                            {columnas.map((columna, index) => (
+                                                <td key={item.id + index}>
+                                                    {item[columna]}
+                                                </td>
+                                            ))}
                                             <td>
                                                 <button title="Eliminar" className='margin-right-10' onClick={() => handleDelete(item.id)} ><FaTrash />   </button>
                                                 <button title="Editar" className='margin-right-10' onClick={() => handleEdit(item.id)}><FaEdit /> </button>

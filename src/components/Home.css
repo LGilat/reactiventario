@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
-  }
-  
-  .quick-link {
+}
+
+.quick-link {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     background-color: #3498db;
@@ -14,23 +14,23 @@
     font-weight: bold;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .quick-link:hover {
+}
+
+.quick-link:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     color: #dbd4d4;
-  }
-  
-  .quick-link:active {
+}
+
+.quick-link:active {
     transform: translateY(0);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
+}
 
 
-  .card {
+.card {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -38,26 +38,26 @@
     margin: 1rem;
     width: 250px;
     transition: all 0.3s ease;
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card h2 {
+}
+
+.card h2 {
     color: #2c3e50;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-  }
-  
-  .card p {
+}
+
+.card p {
     color: #7f8c8d;
     font-size: 1rem;
     margin-bottom: 1rem;
-  }
-  
-  .card .quick-link {
+}
+
+.card .quick-link {
     display: inline-block;
     background-color: #3498db;
     color: white;
@@ -66,10 +66,140 @@
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease;
-  }
-  
-  .card .quick-link:hover {
+}
+
+.card .quick-link:hover {
     background-color: #2980b9;
-  }
-  
-  
+}
+
+/* Add this new section to your existing CSS file */
+
+.hero-section {
+    position: relative;
+    text-align: center;
+    max-width: 100%;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image {
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.2;
+}
+
+.front-image {
+    top: 0;
+    left: 0;
+    transform: translateX(-30%) translateY(-30%) rotate(-10deg);
+}
+
+.back-image {
+    bottom: 0;
+    right: 0;
+    transform: translateX(30%) translateY(30%) rotate(10deg);
+}
+
+.hero-section h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+
+.hero-section hr {
+    width: 50%;
+    margin: 1rem auto;
+    border: none;
+    border-top: 2px solid #3498db;
+}
+
+.hero-icon {
+    margin-right: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+
+.hero-section::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: #3498db;
+    margin: 2rem auto 0;
+}
+
+.section-pedido {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    margin-top: 30px;
+    border-top: 1px solid #e9ecef;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.section-pedido .card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.section-pedido .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-pedido h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.section-pedido p {
+    color: #6c757d;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.section-pedido .quick-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.section-pedido .quick-link:hover {
+    background-color: #0056b3;
+}
+
+.section-pedido .card h2 svg {
+    margin-right: 10px;
+    color: #007bff;
+}

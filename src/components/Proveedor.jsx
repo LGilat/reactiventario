@@ -23,6 +23,9 @@ const ProveedorSchema = Yup.object().shape({
 
 });
 
+const columnas = [ "nombre", "contacto", "direccion"];
+
+
 const Proveedor = () => {
     const [success, setSuccess] = useState(false);
     const [trigger, setTrigger] = useState(0);
@@ -80,7 +83,7 @@ const Proveedor = () => {
                     </Form>
                 )}
             </Formik>
-            <DataDisplay endpoint="proveedor" trigger={trigger} />
+            <DataDisplay endpoint="proveedor" trigger={trigger} columnas={columnas} />
         </div>
 
     )

@@ -21,6 +21,9 @@ const ClienteSchema = Yup.object().shape({
         .required('Required'),
 });
 
+
+const columnas = [ "nombre", "contacto", "direccion"];
+
 const Cliente = () => {
     const [success, setSuccess] = useState(false);
     const [trigger, setTrigger] = useState(0);
@@ -78,7 +81,7 @@ const Cliente = () => {
                     </Form>
                 )}
             </Formik>
-            <DataDisplay endpoint="cliente" trigger={trigger} />
+            <DataDisplay endpoint="cliente" trigger={trigger} columnas={columnas} />
         </div>
 
     )

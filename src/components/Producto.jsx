@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import DataDisplay from './DataDisplay';
 import { FaTruck } from 'react-icons/fa';  
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './Producto.css'
 
 
-const ProveedorSchema = Yup.object().shape({
+const ProductoSchema = Yup.object().shape({
     nombre: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
@@ -26,9 +27,11 @@ const ProveedorSchema = Yup.object().shape({
 
 });
 
-
+const columnas = [ "nombre", "descripcion", "categoria", "precioCompra", "precioVenta"];
 
 const Producto = () => {
+    const [success, setSuccess] = useState(false);
+    const [trigger, setTrigger] = useState(0);
     return (
         <div>
             <h1 className='titulo producto-title'> <FaTruck />  Producto</h1>
@@ -40,10 +43,10 @@ const Producto = () => {
                     precioCompra: '',
                     precioVenta: '',
                 }}
-                validationSchema={ProveedorSchema}
+                validationSchema={ProductoSchema}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
-
-                    fetch('api/proveedor', {
+                
+                    fetch('http://localhost:3000/api/producto', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -54,7 +57,8 @@ const Producto = () => {
                         .then(data => {
                             if (data.ok) {
                                 alert(data.mensaje);
-
+                                setSuccess(true);
+                                setTrigger( prev => prev + 1);
                                 resetForm();
                             } else {
                                 alert(data.mensaje);
@@ -70,7 +74,7 @@ const Producto = () => {
                 }}
             >
                 {({ isSubmitting }) => (
-                    <Form className="form">
+                    <Form className="form" style={success ? { border: '1px solid green' } : { border: 'none'}}>
                         <Field type="text" name="nombre" placeholder="Nombre"  className="textbox" />
                         <ErrorMessage name="nombre" component="div"   className="error-message"/>
 
@@ -92,6 +96,7 @@ const Producto = () => {
                     </Form>
                 )}
             </Formik>
+            <DataDisplay endpoint="producto" trigger={trigger} columnas={columnas} />
         </div>
 
     )
